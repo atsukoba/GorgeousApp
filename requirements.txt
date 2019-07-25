@@ -1,0 +1,9 @@
+flask
+gunicorn
+line-bot-sdk
+pykakasi
+mecab-python3
+python-Levenshtein
+requests
+bs4
+wikipedia
