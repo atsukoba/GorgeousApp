@@ -58,12 +58,12 @@ def callback():
 def handle_message(event):
     ans = g.revolution(event.message.text, app_use=True)
 
-    ans_text = f"ここ！{ans['result']}\n\n"
+    ans_text = f"ここ！{ans['result']}！！\n\n"
     ans_text += f"{ans['wiki_summary']}\n"
-    ans_text += f"Map: {ans['map']}\n"
+    ans_text += f"{ans['map']}\n\n"
 
-    ans_text += f"INPUT: {ans['input']}"
-    ans_text += f"ROMAN: {ans['roman']}"
+    ans_text += f"INPUT: {ans['input']}\n"
+    ans_text += f"ROMAN: {ans['roman']}\n"
 
     for r in ans['results']:
         ans_text += r + "\n"

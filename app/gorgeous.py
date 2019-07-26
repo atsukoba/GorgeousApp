@@ -64,7 +64,7 @@ class Gorgeous:
         """
         convert "kanji" to "katakana"
         """
-        morphed = [re.split("[,\t\s\n]", w) for w in self.tagger.parse(s).split("\n")]
+        morphed = [re.split(r"[,\t\s\n]", w) for w in self.tagger.parse(s).split("\n")]
         morphed.remove([""])
         morphed.remove(["EOS"])
         
