@@ -23,10 +23,11 @@ g = Gorgeous()
 # for Web App
 @app.route('/', methods=['POST', 'GET'])
 def home():
-    html = render_template('index.html')
+    html = render_template('index.html',
+        answer={})
     if request.method == 'POST':
         html = render_template('index.html',
-            result=g.revolution(request.form["input"]))
+            answer=g.revolution(request.form["input"], app_use=True))
     return html
 
 
@@ -55,7 +56,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    ans = g.revolution(event.message.text)
+    ans = g.revolution(event.message.text, app_use=True)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=ans))

@@ -15,21 +15,91 @@
     <meta property="og:site_name" content="Gorgeous App">
     <meta property="og:locale" content="ja_JP">
     <meta property="article:author" content="Atsuya Kobayashi">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/slideout.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
     <link rel="author" href="https://www.atsuya.xyz">
+    <script src="/static/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
     <!-- <link rel="icon" type="image/png" sizes="32x32" href="/path/to/favicon-32x32.png"> -->
-    <!-- <script src="script.js"></script> -->
   </head>
   <body>
-    <h1>
-      Gorgeous App
-    </h1>
-    <form action="/" method="POST">
-      <p>入力文字列: <input type="text" name="input" /></p>
-      <p>レボ☆リューション<input type="submit" value="submit" /></p>
-   </form>
-   <div>
-     結果：{{ result }}
-   </div>
+    <nav id="menu" class="menu">
+      <section class="menu-section">
+        <h3 class="menu-section-title">Docs</h3>
+        <ul class="menu-section-list">
+          <li><a href="https://github.com/atsukoba/GorgeousApp" target="_blank">Installation</a></li>
+          <li><a href="https://github.com/atsukoba/GorgeousApp" target="_blank">Usage</a></li>
+          <li><a href="https://github.com/atsukoba/GorgeousApp" target="_blank">API</a></li>
+        </ul>
+      </section>
+      <section class="menu-section">
+        <h3 class="menu-section-title">About</h3>
+        <ul class="menu-section-list">
+          <li><a href="https://github.com/atsukoba/GorgeousApp" target="_blank">Fork it</a></li>
+          <li><a href="https://github.com/atsukoba/GorgeousApp/issues/new" target="_blank">Create an issue</a></li>
+          <li><a href="https://github.com/atsukoba/GorgeousApp/releases/" target="_blank">Download</a></li>
+        </ul>
+      </section>
+    </nav>
+    <main id="panel">
+      <header>
+        <button class="toggle-button btn-hamburger js-slideout-toggle">
+          <i class="fas fa-globe-asia"></i>
+        </button>
+        <h1>ゴー☆ジャス AI</h1>
+      </header>
+      <form action="/" method="POST">
+        <section class="input">
+          <input type="text" name="input" placeholder="まだ助かる" class="q"/>
+          <input type="submit" value="レボ☆リューション" class="revo" />
+        </section>
+        <section class="settings">
+
+        </section>
+      </form>
+      <hr>
+      <section class="results">
+        <div class="result">
+          <a href="{{ answer['map'] }}" class="main_result">
+            <p>ここ！ {{ answer["result"] }}</p>
+          </a>
+          <p>INPUT: {{ answer["input"] }}</p>
+          <p>ROMAN: {{ answer["roman"] }}</p>
+        </div>
+        <div class="ranking">
+          {% for r in answer["results"] %}
+            <p>
+              {{ r }}
+            </p>
+          {% endfor %}
+        </div>
+        <div class="wikipedia">
+          <iframe src="{{ answer['wiki_url'] }}" width="100%" height="300px"></iframe>
+        </div>
+        <!-- <div class="GoorleMaps">
+          <iframe src="{{ answer['map'] }}" width="100%"></iframe>
+          {{ answer["map"] }}
+        </div> -->
+      </section>
+      <footer>
+        <p>Atsuya Kobayashi</p>
+        <p>v1.0.0 2019-07-26</p>
+      </footer>
+    </main>
+    <script>
+      var slideout = new Slideout({
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('menu'),
+        'padding': 256,
+        'tolerance': 70
+      });
+      // Toggle button
+      document.querySelector('.toggle-button').addEventListener('click', function() {
+        slideout.toggle();
+      });
+    </script>
   </body>
 </html>

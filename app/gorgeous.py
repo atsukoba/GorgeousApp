@@ -1,5 +1,6 @@
 import logging
 import re
+import os
 import shutil
 from logging import getLogger
 
@@ -41,14 +42,16 @@ class Gorgeous:
         published on 『国コード一覧CSV ISO 3166-1』
         https://qiita.com/tao_s/items/32b90a2751bfbdd585ea
         """
+        assert os.path.exists(fname), f"{fname} is not found"
         with open(fname, "r") as f:
             nations = f.read().split("\n")
+
         nations = [re.split("[,|]", nation)[0].replace("\"", "") for nation in nations]
         nations.pop(0)
         return nations
 
-    def read_csv_data(self, fname="data/nations.csv", **kwargs) -> list:
-        with open(fname, "r") as f:
+    def read_csv_data(self, filepath, **kwargs) -> list:
+        with open(filepath, "r") as f:
             data = f.read().split("\n")
         data = [re.split("[,|]", area)[0].replace("\"", "") for area in data]
         data.pop(0)
@@ -91,7 +94,7 @@ class Gorgeous:
 
         return "".join([l for l in word if l in ["a", "i", "u", "e", "o", "n"]])
 
-    def revolution(self, sentence: str, **kwargs) -> str:
+    def revolution(self, sentence: str, app_use=False ,**kwargs):
         """
         Revolution: Get Similar Nation Name from Word
 
@@ -102,39 +105,61 @@ class Gorgeous:
         ----
         n_result : default=5 : lines of result print
         vowel : default=False : if true, word-distance will be calculated based on vowels
+        app_use : default=False, if true, returns value of dict with some info
         """
 
         # default kargs
         n_result = kwargs.get('n_result', 3)
         vowel = kwargs.get('vowel', False)
 
-        print("INPUT: ", sentence)
+        answer = dict()
+
+        log.info(f"INPUT: {sentence}")
+        answer["input"] = sentence
         # sentence -> [words] -> [katakana] -> [roman]
         word_roman = self.romanize(sentence, **kwargs)
-        print("ROMAN: ", word_roman)
-        
+        log.info(f"ROMAN: {word_roman}")
+        answer["roman"] = word_roman
+
         if vowel:
             word_vowel = self.extract_vowel(word_roman)
-            print("VOWEL: ", word_vowel)
+            log.info(f"VOWEL: {word_vowel}")
+            answer["vowel"] = word_vowel
             dists = [D(word_vowel[-1], nation[0]) for nation in self.nations_roman_vowel]
         else:
             dists = [D(word_roman[-1], nation[0]) for nation in self.nations_roman]
+            answer["vowel"] = ""
         idx = sorted(range(len(dists)), key=lambda k: dists[k])
 
         # logging
-        print("RESULT:")
+        log.info("RESULT:")
+        answer["results"] = []
         for i in range(n_result):
             if vowel:
-                print(f"\tNo.{i+1} : {self.nations[idx[i]]} ({self.nations_roman_vowel[idx[i]]}) : ({dists[idx[i]]})")
+                msg = f"No.{i+1} : {self.nations[idx[i]]} ({self.nations_roman_vowel[idx[i]]}) : ({dists[idx[i]]})"
+                log.info("\t" + msg)
+                answer["results"].append(msg)
             else:
-                print(f"\tNo.{i+1} : {self.nations[idx[i]]} ({self.nations_roman[idx[i]]}) : ({dists[idx[i]]})")
+                msg = f"No.{i+1} : {self.nations[idx[i]]} ({self.nations_roman[idx[i]]}) : ({dists[idx[i]]})"
+                log.info("\t" + msg)
+                answer["results"].append(msg)
         self.recent_answer = self.nations[idx[0]]
+        answer["result"] = self.nations[idx[0]]
+
+        # Get meta info
+        map_url = self.googlemap()
+        log.info(f"ここ！({map_url})")
+        answer["map"] = map_url
+        print("-" * shutil.get_terminal_size()[0])  # draw line
+        
+        wiki = self.wikipedia()
+        log.info(f"{wiki[1]}！！\n")
+        _, answer["wiki_summary"], answer["wiki_url"] = wiki
+        print(u"☆" * shutil.get_terminal_size()[0])  # draw line
 
         # Answer
-        print(f"ここ！({self.googlemap()})")
-        print("-" * shutil.get_terminal_size()[0])  # draw line
-        print(f"{self.wikipedia()[1]}！！\n")
-        print(u"☆" * shutil.get_terminal_size()[0])  # draw line
+        if app_use:  # returns dict value
+            return answer
         return self.recent_answer
 
     def googlemap(self, place=None) -> str:

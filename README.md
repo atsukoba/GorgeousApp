@@ -1,6 +1,6 @@
 # GorgeousApp
 
-![Heroku](https://heroku-badge.herokuapp.com/?app=gorgeous-line-bot)
+![Heroku](https://heroku-badge.herokuapp.com/?app=gorgeous-app)
 
 ---
 
@@ -19,7 +19,7 @@ ID: [@244wensq](http://nav.cx/4O8fsmz)
 
 [<https://gorgeous-app.herokuapp.com/>](https://gorgeous-app.herokuapp.com/)
 
-![gif](https://i.gyazo.com/12737d67a9fef0beacdd6a5e20d7fb80.gif)
+![gif](https://i.gyazo.com/e12670ef155861b6544e3be7ede5b1e7.gif)
 
 ---
 
@@ -53,3 +53,8 @@ docker run -p 8080:8000 -it --rm
 ```shell
 python get_nations_data.py
 ```
+
+#### Front-end
+
+- SASS style css
+- menu with [Slideout.js](https://slideout.js.org/)
