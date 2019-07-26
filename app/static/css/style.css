@@ -2,10 +2,91 @@ html, body, ul, li {
   margin: 0;
 }
 
-h1 {
+header {
+  background-color: black;
+  height: 60px;
+}
+
+header h1 {
+  color: white;
+  font-size: 20px;
+  margin: 0;
+  line-height: 60px;
+  text-align: center;
+}
+
+header .btn-hamburger {
+  top: 0;
+  left: 20px;
+}
+
+header .btn-hamburger i {
+  color: white;
+  line-height: 60px;
+}
+
+section {
+  margin: 0;
+}
+
+section.input {
+  margin: 20px 0;
+}
+
+section.input input {
+  display: block;
+  border: solid 1px blueviolet;
+  border-radius: 10px;
+  margin: 10px auto;
+  text-align: center;
+  padding: 5px;
+}
+
+section.input input.q {
+  font-weight: bold;
+}
+
+section.input input.revo {
+  background-color: blueviolet;
+  color: white;
+  font-weight: bold;
+}
+
+section.results {
+  padding: 0 15px;
+}
+
+section.results .result p {
+  text-align: center;
+}
+
+section.results .result .main_result {
+  font-size: 20px;
+  display: block;
+  color: white;
+  background-color: black;
+  padding: 5px;
+  margin: 0 auto;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  margin: 0 auto;
+  height: auto;
+  line-height: 20px;
+  font-weight: bold;
+}
+
+section.results .result .main_result p {
+  margin: 0;
+}
+
+footer {
+  color: white;
+  background-color: black;
+  height: 60px;
+}
+
+footer p {
+  margin: 5px auto;
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */

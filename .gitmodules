@@ -1,0 +1,3 @@
+[submodule "app/static/slideout"]
+	path = app/static/slideout
+	url = https://github.com/Mango/slideout.git
