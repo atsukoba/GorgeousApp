@@ -1,13 +1,13 @@
 # GorgeousApp
 
-![Heroku](https://heroku-badge.herokuapp.com/?app=gorgeous-app)
-
----
-
-<a href="http://nav.cx/4O8fsmz"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
+[![App:Gorgeous](https://img.shields.io/badge/App-Gorgeous-5a00b4.svg?longCache=true)](https://gorgeous-app.herokuapp.com)
+[![App:LINEbot](https://img.shields.io/badge/App-LINEbot-1dcd00.svg?longCache=true)](http://nav.cx/4O8fsmz)
+![Deployed on:Heroku](https://img.shields.io/badge/Deployed-Heroku-ff69b4.svg?longCache=true)
 
 `flask` & `LINE-bot-sdk` & `gorgeous.py` on `Heroku`  
 ゴー☆ジャスWebアプリ&LINEボット 〜キミのハートに、レボ☆リューション〜
+
+<a href="http://nav.cx/4O8fsmz"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
 
 ## LINE-bot
 
