@@ -59,7 +59,7 @@ def handle_message(event):
     ans = g.revolution(event.message.text, app_use=True)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=ans))
+        TextSendMessage(text=ans["result"]))
 
 
 @app.route("/test", methods=['POST', 'GET'])
