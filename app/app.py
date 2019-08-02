@@ -24,7 +24,11 @@ g = Gorgeous()
 @app.route('/', methods=['POST', 'GET'])
 def home():
     html = render_template('index.html',
-        answer={})
+        answer={
+            "result": "○○",
+            "input": "○○",
+            "roman": "○○",
+            "results": "○○"})
     if request.method == 'POST':
         html = render_template('index.html',
             answer=g.revolution(request.form["input"], app_use=True))

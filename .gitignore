@@ -3,6 +3,9 @@ config.json
 .DS_Store
 .vscode
 
+# js node_modules
+app/react-app/node_modules/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

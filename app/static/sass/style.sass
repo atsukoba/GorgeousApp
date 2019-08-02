@@ -42,6 +42,9 @@ section.input
         background-color: blueviolet
         color: white
         font-weight: bold
+        width: 150px
+        height: 150px
+        border-radius: 75px
 
 section.settings
 
@@ -52,26 +55,37 @@ section.results
         p
             text-align: center
         .main_result
-            font-size: 20px
+            font-size: 40px
             display: block
-            color: white
-            background-color: black
+            color: blueviolet
             padding: 5px
-            margin: 0 auto
+            margin: 20px auto
+            width: -webkit-fit-content
+            width: -moz-fit-content
             width: fit-content
             height: auto
-            line-height: 20px
+            line-height: 40px
             font-weight: bold
             p
                 margin: 0
+        .map_link
+            display: block
+            width: 100%
+            font-size: 12px
+            text-align: center
 
     .ranking
+        text-align: center
+
 
 
 footer
     color: white
     background-color: black
+    position: fixed
+    width: 100vw
     height: 60px
+    bottom: 0
     p
         margin: 5px auto
         text-align: center
