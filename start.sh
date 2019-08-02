@@ -1,0 +1,4 @@
+export CHANNEL_ACCESS_TOKEN="XXXXXXX"
+export CHANNEL_SECRET="XXXXXXX"
+
+python run.py
