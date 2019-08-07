@@ -1,17 +1,24 @@
 html, body, ul, li {
   margin: 0;
+  font-size: 16px;
 }
 
 header {
+  position: fixed;
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1000;
   background-color: black;
-  height: 60px;
+  width: 100vw;
+  height: 50px;
 }
 
 header h1 {
   color: white;
   font-size: 20px;
   margin: 0;
-  line-height: 60px;
+  line-height: 50px;
   text-align: center;
 }
 
@@ -22,27 +29,63 @@ header .btn-hamburger {
 
 header .btn-hamburger i {
   color: white;
-  line-height: 60px;
+  line-height: 50px;
 }
 
 section {
   margin: 0;
 }
 
+section.banner {
+  margin: 0;
+  padding: 0;
+}
+
+section.banner .wrapper {
+  width: 100vw;
+  height: 75vw;
+  background-image: url(../img/earth.gif);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+section.banner .wrapper h2 {
+  color: white;
+  font-size: 2rem;
+  line-height: 2rem;
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  top: 40%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+section.about {
+  display: none;
+}
+
 section.input {
-  margin: 20px 0;
+  margin: 0 auto;
+  padding: 40px 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 section.input input {
-  display: block;
-  border: solid 1px blueviolet;
-  border-radius: 10px;
+  display: inline-block;
+  border: solid .5px black;
+  border-radius: 5px;
   margin: 10px auto;
-  text-align: center;
   padding: 5px;
 }
 
 section.input input.q {
+  color: black;
+  text-align: left;
   font-weight: bold;
 }
 
@@ -50,9 +93,7 @@ section.input input.revo {
   background-color: blueviolet;
   color: white;
   font-weight: bold;
-  width: 150px;
-  height: 150px;
-  border-radius: 75px;
+  text-align: center;
 }
 
 section.results {
@@ -64,7 +105,7 @@ section.results .result p {
 }
 
 section.results .result .main_result {
-  font-size: 40px;
+  font-size: 32px;
   display: block;
   color: blueviolet;
   padding: 5px;
