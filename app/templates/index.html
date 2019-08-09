@@ -19,11 +19,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/slideout.min.css">
+    <link rel="stylesheet" href="/static/css/fakeLoader.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
     <link rel="author" href="https://www.atsuya.xyz">
-    <script src="/static/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-    <script src="https://raw.githubusercontent.com/joaopereirawd/fakeLoader.js/master/js/fakeLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <script src="/static/js/fakeLoader.min.js"></script>
     <!-- <link rel="icon" type="image/png" sizes="32x32" href="/path/to/favicon-32x32.png"> -->
   </head>
   <body>
@@ -39,7 +41,7 @@
       <section class="menu-section">
         <h3 class="menu-section-title">About</h3>
         <ul class="menu-section-list">
-            <li><a href="https://github.com/atsukoba/GorgeousApp" target="_blank">LINE bot</a></li>
+            <li><a href="https://line.me/R/ti/p/%40244wensq" target="_blank">LINE bot</a></li>
           <li><a href="https://github.com/atsukoba/GorgeousApp" target="_blank">Fork it</a></li>
           <li><a href="https://github.com/atsukoba/GorgeousApp/issues/new" target="_blank">Create an issue</a></li>
           <li><a href="https://github.com/atsukoba/GorgeousApp/releases/" target="_blank">Download</a></li>
@@ -47,6 +49,28 @@
       </section>
     </nav>
     <main id="panel">
+      <div id="fakeLoader" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(48, 178, 152); z-index: 99999; display: none;">
+        <div class="fl spinner2" style="position: absolute; left: 913.5px; top: 519.5px;">
+          <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+          <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+          <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+        </div>
+      </div>
       <header>
         <button class="toggle-button btn-hamburger js-slideout-toggle">
           <i class="fas fa-globe-asia"></i>
@@ -78,27 +102,68 @@
       <hr>
       <section class="results">
         <div class="result">
-          <p class="main_result">ここ！ {{ answer["result"] }}</p>
+          <p class="main_query">
+            {{ answer["input"] }}...
+            <span>
+              Q
+            </span>
+          </p>
+          {# Top Result #}
+          <p class="main_query">
+            <i class="fas fa-angle-double-down"></i>
+          </p>
+          <p class="main_result">
+            {{ answer["result"] }}
+            <span>
+              1
+            </span>
+          </p>
+          <p class="sub_result">
+            {{ answer["results"][0][1] }} / {{ answer["roman"] }}
+          </p>
+          {# Chart #}
+          <div class="canvas_wrap"><canvas id="myChart"></canvas><p></p></div>
+          <div id="myChart_data" style="display:none">
+            {{ answer["results"][0][-1] }}
+          </div>
+          <p style="font-family: serif;">Wikipedia</p>
+          <p class="wikipedia">
+            {{ answer["wiki_summary"] }}
+          </p>
           <a href="{{ answer['map'] }}" class="map_link">
-            Google Mapへ
+            Have a Nice Trip: Google Map
           </a>
-          <p>INPUT: {{ answer["input"] }}</p>
-          <p>ROMAN: {{ answer["roman"] }}</p>
-        </div>
-        <div class="ranking">
-          {% for r in answer["results"] %}
-            <p>
-              {{ r }}
+          <p>
+            ↓結果をツイートしよう！↓
+            <a href="https://twitter.com/share" class="twitter-share-button" 
+              data-url="https://gorgeous-app.herokuapp.com/"
+              data-text='{{answer["input"] }}...&#010;&#010;ここ！ {{ answer["result"] }}！！&#010;(適合率: {{ answer["results"][0][-1] }}%)&#010;&#010; @Gorgeous55555&#010;&#010;Tweet from https://gorgeous-app.herokuapp.com/&#010;{{ answer["wiki_url"] }}'
+              data-related="Gorgeous55555,atsuyakoba"
+              data-count="horizontal"
+              data-lang="ja" data-hashtags="ゴージャス" data-size="large"
+            ></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </p>
+
+          <hr>
+
+          {# after 2nd results #}
+          {% for r in answer["results"][1:] %}
+            <p class="main_result">
+              {{ r[0] }}
+              <span>
+                {{loop.index + 1}}
+              </span>
             </p>
+            <p class="sub_result">
+              {{ r[1] }} / {{ answer["roman"] }}
+            </p>
+            {# Chart #}
+            <div class="canvas_wrap"><canvas id="myChart_{{loop.index + 1}}"></canvas><p></p></div>
+            <div id="myChart_{{loop.index + 1}}_data" style="display:none">
+              {{ r[-1] }}
+            </div>
           {% endfor %}
         </div>
-        <div class="wikipedia">
-          <iframe src="{{ answer['wiki_url'] }}" width="100%" height="500px"></iframe>
-        </div>
-        <!-- <div class="GoorleMaps">
-          <iframe src="{{ answer['map'] }}" width="100%"></iframe>
-          {{ answer["map"] }}
-        </div> -->
       </section>
       <footer>
         <p>Atsuya Kobayashi</p>
@@ -106,6 +171,15 @@
       </footer>
     </main>
     <script>
+      // Loader
+      $(document).ready(function () {
+        $.fakeLoader({
+          timeToHide: 2000,
+          zIndex: "999",
+          bgColor: '#2ecc71',
+          spinner:"spinner1"
+        });
+      });
       var slideout = new Slideout({
         'panel': document.getElementById('panel'),
         'menu': document.getElementById('menu'),
@@ -117,5 +191,6 @@
         slideout.toggle();
       });
     </script>
+    <script src="/static/js/script.js"></script>
   </body>
 </html>

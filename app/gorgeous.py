@@ -1,3 +1,4 @@
+import argparse
 import logging
 import re
 import os
@@ -135,14 +136,20 @@ class Gorgeous:
         log.info("RESULT:")
         answer["results"] = []
         for i in range(n_result):
-            if vowel:
-                msg = f"No.{i+1} : {self.nations[idx[i]]} ({self.nations_roman_vowel[idx[i]]}) : ({dists[idx[i]]})"
-                log.info("\t" + msg)
-                answer["results"].append(msg)
-            else:
-                msg = f"No.{i+1} : {self.nations[idx[i]]} ({self.nations_roman[idx[i]]}) : ({dists[idx[i]]})"
-                log.info("\t" + msg)
-                answer["results"].append(msg)
+            rank = idx[i]
+            nation = self.nations[rank]
+            dist = dists[rank]
+            roman = self.nations_roman_vowel[rank] if vowel else self.nations_roman[rank]
+            # calc score
+            roman = roman[0] if type(roman) == list else roman  # list -> str
+            word_roman = word_roman[0] if type(word_roman) == list else word_roman  # list -> str
+            score = (len(word_roman) - int(dist)) / len(roman) if len(roman) != 0 else 0
+            score = round(100 * score, 2)
+            # build message for log and line bot
+            msg = f"No.{i+1} : {nation} ({roman}) : ({dist} : {score}%)"
+            log.info("\t" + msg)
+            answer["results"].append([nation, roman, dist, score])
+
         self.recent_answer = self.nations[idx[0]]
         answer["result"] = self.nations[idx[0]]
 
@@ -190,8 +197,6 @@ class Gorgeous:
 
 
 if __name__ == "__main__":
-
-    import argparse
 
     parser = argparse.ArgumentParser(
         description='キミも、ゴー☆ジャスになろう！')

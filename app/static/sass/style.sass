@@ -1,5 +1,31 @@
 @charset 'utf-8'
 
+$xl: 1440px
+$lg: 1200px
+$md: 992px
+$sm: 767px
+$xs: 576px
+
+@mixin xl
+	@media (min-width: ($xl))
+		@content
+
+@mixin lg
+	@media (min-width: ($md))
+		@content
+
+@mixin md
+	@media (max-width: ($md))
+		@content
+
+@mixin sm
+	@media (max-width: ($sm))
+		@content
+
+@mixin xs
+	@media (max-width: ($xs))
+		@content
+
 html, body, ul, li
     margin: 0
     font-size: 16px
@@ -23,15 +49,12 @@ header
     .btn-hamburger
         top: 0
         left: 20px
-
         i
             color: white
             line-height: 50px
 
-
 section
     margin: 0
-
 
 section.banner
     margin: 0
@@ -39,11 +62,14 @@ section.banner
 
     .wrapper
         width: 100vw
-        height: 75vw
+        height: 150px
+        background-size: contain
         background-image: url(../img/earth.gif)
-        background-size: cover
         background-position: center
         position: relative
+        @include sm
+            height: 75vw
+            background-size: cover
         h2
             color: white
             font-size: 2rem
@@ -66,20 +92,21 @@ section.input
     width: fit-content
     input
         display: inline-block
-        border: solid .5px black
+        border: solid .5px grey
         border-radius: 5px
         margin: 10px auto
-        padding: 5px
+        padding: 10px
     input.q
+        width: 190px
         color: black
         text-align: left
         font-weight: bold
     input.revo
+        width: 100px
         background-color: blueviolet
         color: white
         font-weight: bold
         text-align: center
-
 
 section.settings
 
@@ -89,38 +116,70 @@ section.results
     .result
         p
             text-align: center
-        .main_result
-            font-size: 32px
-            display: block
-            color: blueviolet
-            padding: 5px
-            margin: 20px auto
-            width: -webkit-fit-content
-            width: -moz-fit-content
+        .main_query, .main_result
             width: fit-content
             height: auto
-            line-height: 40px
+            display: block
+            position: relative
+            font-size: 32px
             font-weight: bold
+            color: black
+            margin: 60px auto 0
+            padding: 5px 0
+            line-height: 40px
+            text-align: center
+            span
+                font-size: 2rem
+                opacity: 0  // unfixed
+                position: absolute
+                left: -2rem
+                top: 0
             p
                 margin: 0
+        .sub_result
+            margin: 0 auto 30px
+        div.canvas_wrap
+            position: relative
+            max-width: 500px
+            margin: 0 auto
+            p
+                position: absolute
+                top: 0
+                bottom: 0
+                right: 0
+                left: 0
+                margin: auto
+                height: 2rem
+                font-size: 2rem
+                font-weight: bold
+                text-align: center
+        .wikipedia
+            height: 200px
+            border: .5px solid lightgrey
+            padding: 5px
+            border-radius: 5px
+            overflow-y: scroll
+            text-align: left
         .map_link
             display: block
             width: 100%
-            font-size: 12px
+            font-size: 20px
+            font-weight: bold
             text-align: center
+        .twitter-share-button
+            display: block
+            margin: 20px auto
 
     .ranking
         text-align: center
 
-
-
 footer
     color: white
     background-color: black
-    position: fixed
     width: 100vw
     height: 60px
     bottom: 0
+    font-size: .75rem
     p
         margin: 5px auto
         text-align: center

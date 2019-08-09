@@ -25,13 +25,13 @@ g = Gorgeous()
 def home():
     html = render_template('index.html',
         answer={
-            "result": "○○",
-            "input": "○○",
-            "roman": "○○",
-            "results": "○○"})
+            "result": "結果",
+            "input": "お題",
+            "roman": "odai",
+            "results": "???"})
     if request.method == 'POST':
         html = render_template('index.html',
-            answer=g.revolution(request.form["input"], app_use=True))
+            answer=g.revolution(request.form["input"], n_result=5, app_use=True))
     return html
 
 
