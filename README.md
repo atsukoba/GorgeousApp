@@ -1,25 +1,16 @@
-# GorgeousApp
+# GorgeousApp [![App:Gorgeous](https://img.shields.io/badge/App-Gorgeous-5a00b4.svg?longCache=true)](https://gorgeous-app.herokuapp.com) [![App:LINEbot](https://img.shields.io/badge/App-LINEbot-1dcd00.svg?longCache=true)](http://nav.cx/4O8fsmz) ![Deployed on:Heroku](https://img.shields.io/badge/Deployed-Heroku-ff69b4.svg?longCache=true)
 
-[![App:Gorgeous](https://img.shields.io/badge/App-Gorgeous-5a00b4.svg?longCache=true)](https://gorgeous-app.herokuapp.com)
-[![App:LINEbot](https://img.shields.io/badge/App-LINEbot-1dcd00.svg?longCache=true)](http://nav.cx/4O8fsmz)
-![Deployed on:Heroku](https://img.shields.io/badge/Deployed-Heroku-ff69b4.svg?longCache=true)
-
-`flask` & `LINE-bot-sdk` & `gorgeous.py` on `Heroku`  
-ゴー☆ジャスWebアプリ&LINEボット 〜キミのハートに、レボ☆リューション〜
-
-<a href="http://nav.cx/4O8fsmz"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
-
-## LINE-bot
-
-ID: [@244wensq](http://nav.cx/4O8fsmz)
-
-![gif](https://i.gyazo.com/6a41b54b6dcc0809dd408499e7a9aedf.gif)
+Gor☆geous Web Application and LINE bot with `flask` and `LINE-bot-sdk` on `Heroku`
 
 ## Web App
 
 [<https://gorgeous-app.herokuapp.com/>](https://gorgeous-app.herokuapp.com/)
 
-![gif](https://i.gyazo.com/e12670ef155861b6544e3be7ede5b1e7.gif)
+![gif](https://i.gyazo.com/c63d4918607e97e777663fe4d4edc383.gif)
+
+## LINE-bot <a href="http://nav.cx/4O8fsmz"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="16" border="0"></a>
+
+![gif](https://i.gyazo.com/6a41b54b6dcc0809dd408499e7a9aedf.gif)
 
 ---
 
